@@ -14,4 +14,4 @@ jobs:
   - name: Login to github container registry
     run: docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.TOKEN_GITHUB}}
   - name: Push Docker Image
-    run: docker push ghcr.io/joziaz/learning-docker:latest
+    run: docker push learning-docker-image:latest
