@@ -10,7 +10,7 @@ jobs:
   steps:
   - uses: actions/checkout@v4
   - name: Build Docker Image
-    run: docker build . -t learning-docker-image:latest
+    run: docker build  -t learning-docker-image:latest .
   - name: Login to github container registry
     run: docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.TOKEN_GITHUB}}
   - name: Push Docker Image
