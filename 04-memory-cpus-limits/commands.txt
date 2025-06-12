@@ -1,0 +1,2 @@
+# docker build -t memeory-cpus-limits .
+# docker run -it --rm --cpus=1 --memory=512m memeory-cpus-limits

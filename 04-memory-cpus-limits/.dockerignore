@@ -1,0 +1,5 @@
+#Exe files
+*.exe
+
+#Dockerfile
+Dockerfile
