@@ -1,0 +1,7 @@
+#Exe files
+*.exe
+
+#Dockerfile
+Dockerfile
+
+commands.txt
