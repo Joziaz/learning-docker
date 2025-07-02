@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    restart:  always
+    environment:
+      - POSTGRES_PASSWORD=strong-password
+      - POSTGRES_USER=root
+      - POSTGRES_HOST=postgres
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:17-alpine
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=strong-password
+      - POSTGRES_USER=root
+      - POSTGRES_DB=todo_app
+    volumes:
+      - ./migrations/:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
