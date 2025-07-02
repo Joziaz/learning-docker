@@ -4,8 +4,20 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"os"
 
 	_ "github.com/lib/pq"
+)
+
+const (
+	port = 5432
+)
+
+var (
+	user     = os.Getenv("POSTGRES_USER")
+	password = os.Getenv("POSTGRES_PASSWORD")
+	host     = os.Getenv("POSTGRES_HOST")
+	dbName   = os.Getenv("POSTGRES_DB")
 )
 
 func newDbConnection() (*sql.DB, error) {
