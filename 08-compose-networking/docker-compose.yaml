@@ -1,0 +1,61 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    restart:  always
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_HOST
+      - POSTGRES_DB
+    depends_on:
+      - postgres
+    networks:
+     - backend
+  
+  # Al no estar en la misma red las applicacione no pueden verse
+  app2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3000
+    restart:  always
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_HOST
+      - POSTGRES_DB
+    depends_on:
+      - postgres
+    networks:
+     - backend
+
+  postgres:
+    image: postgres:17-alpine
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_DB
+    volumes:
+      - ./migrations/:/docker-entrypoint-initdb.d
+    networks:
+      - admin
+      - backend
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - admin
+
+
+networks:
+  admin:
+  backend:
